@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: uhack-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - uhack_pgdata:/var/lib/postgresql/data
+      - ./data:/data:ro
+
+volumes:
+  uhack_pgdata:
+    external: true
